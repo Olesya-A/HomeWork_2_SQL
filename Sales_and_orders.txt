@@ -2,6 +2,11 @@ CREATE DATABASE HomeWork_2;
 
 USE HomeWork_2;
 
+/*
+1. Используя операторы языка SQL, 
+создайте таблицу “sales”. Заполните ее данными. 
+*/
+
 CREATE TABLE sales
 (
 id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -17,6 +22,27 @@ VALUES
 ("2021-01-04", "101 to 300"),
 ("2021-01-05", "greater than 300");
 
+/*
+2. Сгруппируйте значения количества в 3 сегмента: 
+меньше 100(“Маленький заказ”), 
+100-300(“Средний заказ”) 
+и больше 300 (“Большой заказ”)
+*/
+
+SELECT * FROM sales 
+WHERE bucket = "less than equal to 100";
+
+SELECT * FROM sales
+WHERE bucket = "101 to 300";
+
+SELECT * FROM sales
+WHERE bucket = "greater than 300";
+
+/*
+3. Создайте таблицу “orders”, заполните ее значениями. 
+Покажите “полный” статус заказа, используя оператор CASE.
+*/
+
 CREATE TABLE orders
 (
 orderid INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -24,6 +50,7 @@ employeeid VARCHAR(5) NOT NULL,
 amount FLOAT NOT NULL,
 orderstatus VARCHAR(30) NOT NULL
 );
+
 
 INSERT INTO orders (employeeid, amount, orderstatus)
 VALUES
@@ -48,3 +75,15 @@ THEN "Order is cancelled."
 ELSE "FAIL"
 END AS order_summary
 FROM orders;
+
+/*
+4. Чем 0 отличается от NULL?
+
+Ответ: NULL соответствует понятию «пустое поле»,то есть «поле, не
+содержащее никакого значения». Введено для того, чтобы различать в полях БД пустые
+(визуально не отображаемые) значения (например, строку
+нулевой длины) и отсутствующие значения (когда в поле не
+записано вообще никакого значения, даже пустого). 
+NULL означает отсутствие, неизвестность информации.
+Null - не 0.
+*/
